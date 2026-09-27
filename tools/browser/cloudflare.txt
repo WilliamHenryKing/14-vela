@@ -1,0 +1,45 @@
+async (page) => {
+  const base = "http://127.0.0.1:4724";
+  const checks = [];
+  const errors = [];
+  const assert = (ok, name) => { if (!ok) throw new Error(name); checks.push(name); };
+  page.on("pageerror", error => errors.push(error.message));
+  page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
+  await page.emulateMedia({reducedMotion: "no-preference"});
+  await page.setViewportSize({width: 1440, height: 1000});
+  const response = await page.goto(base);
+  assert(response.status() === 200, "Cloudflare homepage returns 200");
+  assert((await response.text()).includes("Make room for more"), "Prerendered content is delivered");
+  assert(response.headers()["cache-control"].includes("must-revalidate"), "Homepage revalidates");
+  assert(response.headers()["x-content-type-options"] === "nosniff", "Content type header is applied");
+  const paths = await page.locator('script[src], link[rel="stylesheet"]').evaluateAll(elements => elements.map(el => el.getAttribute("src") || el.getAttribute("href")));
+  for (const path of paths) {
+    const asset = await page.request.get(base + path);
+    assert(asset.status() === 200, `Asset loads: ${path}`);
+    assert(asset.headers()["cache-control"].includes("immutable"), `Hashed asset caching: ${path}`);
+  }
+  for (const path of ["/not-a-page", "/assets/missing.js", "/.vite/manifest.json", "/src/App.tsx", "/_headers"]) {
+    const missing = await page.request.get(base + path, {headers: {accept: "text/html"}});
+    assert(missing.status() === 404, `Real 404: ${path}`);
+  }
+  await page.waitForTimeout(1500);
+  await page.getByRole("button", {name: "ink card", exact: true}).click();
+  assert(await page.locator(".hero .card-front").evaluate(el => el.classList.contains("finish-ink")), "Card interaction hydrates");
+  await page.getByRole("button", {name: "Explore Vela", exact: true}).click();
+  await page.getByRole("radio", {name: /Plus/}).check();
+  await page.getByRole("button", {name: "See my preview"}).click();
+  assert((await page.locator(".demo-summary").innerText()).includes("89"), "Plan preview works");
+  await page.keyboard.press("Escape");
+  assert(await page.locator("dialog").count() === 0, "Dialog closes by keyboard");
+  await page.screenshot({path: "output/playwright/cloudflare-desktop.png"});
+  await page.emulateMedia({reducedMotion: "reduce"});
+  await page.setViewportSize({width: 390, height: 844});
+  await page.goto(`${base}/#goals`);
+  await page.waitForTimeout(800);
+  assert(await page.locator(".site").evaluate(el => el.classList.contains("motion-off")), "Reduced motion is respected");
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "Mobile has no horizontal overflow");
+  assert(page.url().endsWith("#goals"), "Fragment reload is preserved");
+  await page.screenshot({path: "output/playwright/cloudflare-mobile.png"});
+  assert(errors.length === 0, `No browser errors: ${errors.join("; ")}`);
+  return {base, checks, errors};
+}

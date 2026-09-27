@@ -1,5 +1,7 @@
 # VELA — make room for more
 
+Free Cloudflare hosting preparation and commands: [CLOUDFLARE.md](CLOUDFLARE.md). The local release package is prepared separately from publication.
+
 Project 14: conventional banking website concept with original art and GSAP choreography. No Three.js, game world, real bank or external submission.
 
 From this folder:
