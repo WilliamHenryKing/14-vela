@@ -1,7 +1,23 @@
 {
   "date": "2026-09-27",
+  "pass": "second refinement",
   "runtime": "DOM/CSS/SVG",
   "files": [
+    {
+      "path": "dist/.vite/manifest.json",
+      "bytes": 185,
+      "sha256": "b3fbb3e2f411db9b75abc1020eaeda205d6b548ca907cc6cfd2e1a520811b8d9"
+    },
+    {
+      "path": "dist/assets/index-CrYXNNAO.js",
+      "bytes": 376930,
+      "sha256": "202934f5a737b5d8f22316f43af95a616db6e14c5ec0ac01762c74dc049f67d9"
+    },
+    {
+      "path": "dist/assets/index-DFqf3kaH.css",
+      "bytes": 38661,
+      "sha256": "10f3e35513df609b45af6d36c5e3bdfc74cdd1a4d5c1536baafb2b5fa1ef2026"
+    },
     {
       "path": "dist/favicon.svg",
       "bytes": 242,
@@ -9,23 +25,8 @@
     },
     {
       "path": "dist/index.html",
-      "bytes": 19965,
-      "sha256": "3f16a647e4672144a0717811813bb6608fcd2fb2020e4b53e2fa51a3affc4c5b"
-    },
-    {
-      "path": "dist/.vite/manifest.json",
-      "bytes": 185,
-      "sha256": "d8e5a5a1c6156db49b668c74c9afc71277ec4187322f38ec2bde0fa2bf8b11a2"
-    },
-    {
-      "path": "dist/assets/index-BvAfpaHH.js",
-      "bytes": 372361,
-      "sha256": "116ed140d00ef4dc998d2a43923f19c614479fc0696220b99eb4ac2618b9d312"
-    },
-    {
-      "path": "dist/assets/index-jWfOsV3k.css",
-      "bytes": 34116,
-      "sha256": "09f34e87fd31da6279b6986ccb89ade1ada2a9fdc825216e0486dbbe00c449cb"
+      "bytes": 22075,
+      "sha256": "7ad9d1e146662c31d7c9b1265ef22308e16fd97fcdd11ba9a89f0b4d657bdbe5"
     }
   ]
 }

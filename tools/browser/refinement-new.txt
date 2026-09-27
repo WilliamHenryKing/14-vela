@@ -1,0 +1,38 @@
+async (page) => {
+  page.setDefaultTimeout(7000);
+  const checks=[],errors=[];
+  const assert=(ok,name)=>{if(!ok)throw Error(name);checks.push(name)};
+  const capture=async name=>page.screenshot({path:`docs/visual/captures/refinement-2026-09-27/${name}.png`,scale:'css'});
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.setViewportSize({width:1440,height:1000});
+  await page.goto('http://127.0.0.1:4624/'); await page.waitForTimeout(2600);
+  assert(await page.locator('.page-dock').evaluate(el=>el.inert),'Chapter dock is inert before leaving the hero');
+  const box=await page.locator('.hero-art').boundingBox();
+  await page.mouse.move(box.x+box.width*0.82,box.y+box.height*0.2); await page.waitForTimeout(850);
+  const tilt=await page.locator('.card-parallax').evaluate(el=>getComputedStyle(el).transform);
+  assert(tilt.startsWith('matrix3d'),'Fine-pointer movement tilts the card assembly');
+  await capture('hero-pointer'); await page.mouse.move(5,5); await page.waitForTimeout(850);
+  await page.getByRole('button',{name:'ink card',exact:true}).click();
+  await page.waitForTimeout(1200);
+  assert((await page.locator('.finish-name').innerText()).includes('INK'),'Card finish label follows selection');
+  await capture('hero-refined');
+  await page.locator('.life-interlude').scrollIntoViewIfNeeded(); await page.waitForTimeout(1100); await capture('interlude-desktop');
+  assert(!await page.locator('.page-dock').evaluate(el=>el.inert),'Chapter dock becomes available below hero');
+  await page.getByRole('navigation',{name:'Page chapters'}).getByRole('link',{name:'Your goals',exact:true}).click(); await page.waitForTimeout(900);
+  assert(await page.getByRole('navigation',{name:'Page chapters'}).getByRole('link',{name:'Your goals',exact:true}).getAttribute('aria-current')==='location','Chapter navigation follows the current section');
+  await page.getByRole('button',{name:'Your next chapter',exact:true}).click();
+  assert((await page.locator('.goal-milestone strong').innerText()).startsWith('23'),'Year-one milestone reports correct goal percentage');
+  await page.locator('.goal-milestone').scrollIntoViewIfNeeded(); await page.waitForTimeout(600); await capture('goal-milestone');
+  await page.getByRole('navigation',{name:'Page chapters'}).getByRole('link',{name:'Vela, back to top',exact:true}).click(); await page.waitForTimeout(800);
+  assert(await page.locator('.page-dock').evaluate(el=>el.inert),'Returning to top hides chapter dock');
+  await page.setViewportSize({width:390,height:844});
+  await page.locator('.life-interlude').scrollIntoViewIfNeeded(); await page.waitForTimeout(1100); await capture('interlude-mobile');
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Mobile interlude and dock fit the viewport');
+  await page.emulateMedia({reducedMotion:'reduce'}); await page.waitForTimeout(250);
+  assert(await page.locator('.card-parallax').evaluate(el=>getComputedStyle(el).transform)==='none','Reduced motion removes pointer transforms');
+  await page.addScriptTag({path:'C:/Users/William King/AppData/Local/npm-cache/_npx/0f94ee7615faf582/node_modules/axe-core/axe.min.js'});
+  const accessibility=await page.evaluate(async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return r.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))});
+  assert(errors.length===0,'No browser errors in new interactions');
+  return {checks,errors,accessibility,tilt,scope:'Sampled states and interaction checks, not uninterrupted motion review.'};
+}

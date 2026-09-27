@@ -2,6 +2,12 @@
 
 Implementer review only. William requested no subagents. These scores do not establish independent approval or user acceptance. Scale: 1 placeholder, 2 technical demo, 3 competent, 4 premium studio target, 5 exceptional.
 
+## Second-pass critique
+
+The hero now has material depth and a tangible response to the pointer. Large chapter glyphs make the product sequence easier to read; the citron interlude provides a stronger change in scale and rhythm. Savings feedback explains how far a year of contributions gets the chosen goal. The new chapter dock reduces repeated long scrolling and moves out of the way during keyboard input.
+
+Paired desktop and mobile captures are in `captures/refinement-2026-09-27/`. The visual improvements are visible in those samples. Remaining limitations: the mobile hero still needs more than one short viewport; the product sequence remains intentionally long; a floating dock uses some viewport area; the typography is system-font based. I do not translate these self-reviewed improvements into a claimed 10/10 or independent acceptance. The table below is the historical first-pass assessment.
+
 First-render baseline: captures/baseline. Final paired hero captures and interaction views: captures/review-2026-09-27. Primary revision was secondary-label contrast and phone spacing; hierarchy/composition were retained.
 
 | View | Three remaining design limitations | Composition / type / UI |

@@ -88,6 +88,81 @@ export function usePageMotion(root: RefObject<HTMLDivElement | null>, enabled: b
               scrub: 0.5,
             },
           });
+          gsap.fromTo(
+            ".life-line-one",
+            { xPercent: 9 },
+            {
+              xPercent: -5,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".life-interlude",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.8,
+              },
+            },
+          );
+          gsap.fromTo(
+            ".life-line-two",
+            { xPercent: -10 },
+            {
+              xPercent: 6,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".life-interlude",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.8,
+              },
+            },
+          );
+          gsap.to(".life-star", {
+            rotation: 110,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".life-interlude",
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.8,
+            },
+          });
+          gsap.from(".plinth-glyph", {
+            rotation: -35,
+            scale: 0.75,
+            opacity: 0,
+            duration: 1,
+            scrollTrigger: { trigger: ".product-preview", start: "top 85%", once: true },
+          });
+          media.add("(hover: hover) and (pointer: fine)", () => {
+            const art = root.current?.querySelector<HTMLElement>(".hero-art");
+            const card = root.current?.querySelector<HTMLElement>(".card-parallax");
+            if (!art || !card) return;
+            const rx = gsap.quickTo(card, "rotationX", { duration: 0.7, ease: "power3.out" });
+            const ry = gsap.quickTo(card, "rotationY", { duration: 0.7, ease: "power3.out" });
+            const x = gsap.quickTo(card, "x", { duration: 0.7, ease: "power3.out" });
+            const y = gsap.quickTo(card, "y", { duration: 0.7, ease: "power3.out" });
+            const move = (event: PointerEvent) => {
+              const box = art.getBoundingClientRect();
+              const px = (event.clientX - box.left) / box.width - 0.5;
+              const py = (event.clientY - box.top) / box.height - 0.5;
+              rx(-py * 13);
+              ry(px * 16);
+              x(px * 18);
+              y(py * 12);
+            };
+            const leave = () => {
+              rx(0);
+              ry(0);
+              x(0);
+              y(0);
+            };
+            art.addEventListener("pointermove", move);
+            art.addEventListener("pointerleave", leave);
+            return () => {
+              art.removeEventListener("pointermove", move);
+              art.removeEventListener("pointerleave", leave);
+            };
+          });
         },
         root,
       );

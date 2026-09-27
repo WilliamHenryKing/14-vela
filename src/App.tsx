@@ -40,6 +40,8 @@ function BankCard({ finish = "fern", back = false }: { finish?: Finish; back?: b
         <span>vela</span>
         <Mark />
       </div>
+      <div className="card-serial">EVERYDAY / 2048</div>
+      <span className="card-sheen" />
       <div className="card-art">
         <span />
         <span />
@@ -322,9 +324,16 @@ function ProductStory({ enabled }: { enabled: boolean }) {
               </button>
             ))}
           </fieldset>
-          <div className="phone-plinth">
+          <div className={`phone-plinth plinth-state-${active}`}>
             <span className="plinth-circle" />
+            <span className="plinth-glyph" aria-hidden="true" key={active}>
+              {["↗", "✳", "✓"][active]}
+            </span>
             <Phone active={active} enabled={enabled} />
+            <div className="plinth-index" aria-hidden="true">
+              <span>0{active + 1}</span>
+              <span>/ 03</span>
+            </div>
             <span className="plinth-label">
               A little less banking. <br />A little more living.
             </span>
@@ -487,6 +496,21 @@ function Savings({ enabled }: { enabled: boolean }) {
             </defs>
           </svg>
           <p className="goal-timing">{monthsText}</p>
+          <div className="goal-milestone">
+            <span>YOUR 12-MONTH HEAD START</span>
+            <strong>
+              {Math.round(projection.progress * 100)}
+              <small>% of your goal</small>
+            </strong>
+            <div className="goal-track" aria-hidden="true">
+              <span style={{ transform: `scaleX(${projection.progress})` }} />
+            </div>
+            <p>
+              {projection.progress >= 1
+                ? "A someday plan, within reach."
+                : `${money(Math.max(0, goal.target - projection.total))} left to your goal after year one.`}
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -624,6 +648,90 @@ function Demo({
   );
 }
 
+function PageDock() {
+  const [visible, setVisible] = useState(false);
+  const [active, setActive] = useState("everyday");
+  const dock = useRef<HTMLElement>(null);
+  useGSAP(
+    () => {
+      const meter = dock.current?.querySelector(".dock-progress");
+      if (!meter) return;
+      const progress = gsap.quickSetter(meter, "scaleX");
+      ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        onUpdate: (self) => {
+          const hero = document.querySelector<HTMLElement>(".hero");
+          setVisible(Boolean(hero && hero.getBoundingClientRect().bottom < 80));
+          const sections = ["everyday", "goals", "plans"];
+          let current = "everyday";
+          for (const id of sections)
+            if (
+              (document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <
+              innerHeight * 0.55
+            )
+              current = id;
+          setActive(current);
+          progress(self.progress);
+        },
+      });
+    },
+    { scope: dock },
+  );
+  return (
+    <nav
+      ref={dock}
+      className={`page-dock ${visible ? "is-visible" : ""}`}
+      aria-label="Page chapters"
+      inert={!visible}
+    >
+      <a className="dock-brand" href="#main" aria-label="Vela, back to top">
+        <Mark />
+      </a>
+      {[
+        ["everyday", "Everyday"],
+        ["goals", "Your goals"],
+        ["plans", "Plans"],
+      ].map(([id, label]) => (
+        <a key={id} href={`#${id}`} aria-current={active === id ? "location" : undefined}>
+          {label}
+        </a>
+      ))}
+      <span className="dock-progress" aria-hidden="true" />
+    </nav>
+  );
+}
+
+function LifeInterlude() {
+  return (
+    <section className="life-interlude" aria-label="Less banking. More life.">
+      <div className="life-top">
+        <span className="eyebrow">A SMALL SHIFT. A DIFFERENT EVERYDAY.</span>
+        <Mark />
+      </div>
+      <div className="life-line life-line-one" aria-hidden="true">
+        <span>Less banking.</span>
+        <span className="life-star">✳</span>
+      </div>
+      <div className="life-line life-line-two" aria-hidden="true">
+        <span className="life-outline">More</span>
+        <em>life.</em>
+        <span className="life-arrow">↗</span>
+      </div>
+      <div className="life-bottom">
+        <p>
+          For the plans. The detours.
+          <br />
+          And everything in between.
+        </p>
+        <a href="#plans">
+          Find your fit <Arrow diagonal />
+        </a>
+      </div>
+    </section>
+  );
+}
+
 export function App() {
   const root = useRef<HTMLDivElement>(null);
   const [finish, setFinish] = useState<Finish>("fern");
@@ -636,6 +744,21 @@ export function App() {
   const [demo, setDemo] = useState<Plan | null>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   usePageMotion(root, motion);
+  const previousFinish = useRef(finish);
+  useGSAP(
+    () => {
+      if (motion && previousFinish.current !== finish) {
+        gsap.fromTo(
+          ".hero .card-sheen",
+          { xPercent: -160, opacity: 0.9 },
+          { xPercent: 160, opacity: 0, duration: 1.1, ease: "power2.inOut" },
+        );
+        gsap.fromTo(".finish-name", { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 });
+      }
+      previousFinish.current = finish;
+    },
+    { scope: root, dependencies: [finish, motion], revertOnUpdate: true },
+  );
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
     const change = () => setMotion(!query.matches);
@@ -742,8 +865,10 @@ export function App() {
               ))}
             </svg>
             <div className="card-drift">
-              <BankCard finish="citron" back />
-              <BankCard finish={finish} />
+              <div className="card-parallax">
+                <BankCard finish="citron" back />
+                <BankCard finish={finish} />
+              </div>
             </div>
             <div className="hero-notification hero-support">
               <span className="notification-icon">
@@ -755,7 +880,9 @@ export function App() {
               <span>↗</span>
             </div>
             <div className="hero-finish hero-support">
-              <span>YOUR COLOUR. YOUR CALL.</span>
+              <span>
+                YOUR COLOUR. YOUR CALL.<b className="finish-name">{finish} / everyday</b>
+              </span>
               <FinishPicker value={finish} onChange={setFinish} />
             </div>
             <span className="art-caption">DESIGNED AROUND YOU. / VELA EVERYDAY</span>
@@ -797,6 +924,7 @@ export function App() {
         </section>
         <ProductStory enabled={motion} />
         <Savings enabled={motion} />
+        <LifeInterlude />
         <section className="plans section-pad" id="plans">
           <div className="section-top">
             <span className="eyebrow">03 / YOUR EVERYDAY, YOUR WAY</span>
@@ -904,6 +1032,7 @@ export function App() {
           </button>
         </section>
       </main>
+      <PageDock />
       <footer className="site-footer section-pad">
         <div className="footer-top">
           <a href="#main" className="logo" aria-label="Back to top">

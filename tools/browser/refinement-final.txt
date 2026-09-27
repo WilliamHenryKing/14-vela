@@ -1,0 +1,25 @@
+async (page) => {
+  await page.setViewportSize({width:1440,height:1000});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('http://127.0.0.1:4624/');
+  await page.addScriptTag({path:'C:/Users/William King/AppData/Local/npm-cache/_npx/0f94ee7615faf582/node_modules/axe-core/axe.min.js'});
+  const audit=()=>page.evaluate(async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return r.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}));});
+  const desktop=await audit();
+  await page.getByRole('button',{name:'Explore Vela',exact:true}).click();
+  const dialog=await audit();
+  await page.getByRole('button',{name:'See my preview'}).click();
+  const summary=await audit();
+  await page.keyboard.press('Escape');
+  await page.locator('#starting').focus();
+  await page.waitForTimeout(450);
+  const dockYieldsToKeyboard = await page.locator('.page-dock').evaluate(el=>getComputedStyle(el).opacity==='0');
+  if (!dockYieldsToKeyboard) throw Error('Dock must leave the calculator clear during keyboard input');
+  const browser=page.context().browser();
+  const staticContext=await browser.newContext({javaScriptEnabled:false,viewport:{width:1440,height:1000}});
+  const staticPage=await staticContext.newPage();
+  const response=await staticPage.goto('http://127.0.0.1:4624/');
+  const staticReading=await staticPage.getByRole('heading',{level:1}).isVisible();
+  await staticPage.screenshot({path:'docs/visual/captures/refinement-2026-09-27/no-javascript.png'});
+  await staticContext.close();
+  return {desktop,dialog,summary,dockYieldsToKeyboard,staticReading,httpStatus:response.status()};
+}

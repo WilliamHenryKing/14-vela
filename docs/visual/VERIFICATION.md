@@ -2,6 +2,14 @@
 
 Local implementation and self-review complete for the agreed website scope. No publication or independent/user visual acceptance is claimed.
 
+## Second refinement pass
+
+The second pass adds a pointer-responsive card assembly, metallic surface lighting and finish-change sheen; a larger changing product-stage glyph; a goal milestone and progress track; a contrasting, scrolling typographic interlude; and chapter navigation with reading progress. The dock yields during keyboard adjustment of savings inputs. Motion remains optional, scoped and reversible, with the native-scroll and static-reading paths intact.
+
+`captures/refinement-2026-09-27/` preserves the new sampled views, 25 passing regression checks, 10 new interaction checks and the final desktop/dialog/summary accessibility checks. The final scan also verifies that the dock hides while a calculator input has keyboard focus. Zero browser errors and zero automated axe violations in the recorded final states. Two small plan-price suffixes initially failed contrast; their preserved finding is `contrast-before-refinement.json`, and the final result is `final-check.json`. Six domain tests and 19 assertions remain passing. Strict TypeScript, Biome and the production/prerender build pass.
+
+Final bundle: approximately 377 kB JavaScript / 39 kB CSS raw, 127 / 10 kB gzip; exact hashes and byte sizes are in the current build receipt. The first delivery receipt is preserved with the original review captures. This supersedes the first-pass bundle numbers below.
+
 ## Evidence
 
 `captures/baseline/`: first desktop and portrait render. `captures/review-2026-09-27/`: hero, statement, product controls, calculator, plans, closing, dialog, multiple viewport and reduced-motion captures. `meta.json` records 25 successful browser assertions, browser identity and scope. `contrast-before.json` preserves the initial accessibility findings rather than concealing them. `final-check.json` records the resolved desktop/dialog/summary scans and no-JavaScript check. `build-receipt.json` records exact emitted files, sizes and SHA256 identities.

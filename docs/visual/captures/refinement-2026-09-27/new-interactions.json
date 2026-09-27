@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "Chapter dock is inert before leaving the hero",
+    "Fine-pointer movement tilts the card assembly",
+    "Card finish label follows selection",
+    "Chapter dock becomes available below hero",
+    "Chapter navigation follows the current section",
+    "Year-one milestone reports correct goal percentage",
+    "Returning to top hides chapter dock",
+    "Mobile interlude and dock fit the viewport",
+    "Reduced motion removes pointer transforms",
+    "No browser errors in new interactions"
+  ],
+  "errors": [],
+  "accessibility": [],
+  "tilt": "matrix3d(0.99601, 0, -0.089242, 0, 0.00606982, 0.997684, 0.0677439, 0, 0.0890353, -0.0680153, 0.993703, 0, 5.76, -3.6, 0, 1)",
+  "scope": "Sampled states and interaction checks, not uninterrupted motion review."
+}
