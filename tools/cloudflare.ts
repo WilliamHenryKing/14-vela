@@ -10,6 +10,7 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
+import { createConnection } from "node:net";
 import { dirname, join, relative, resolve } from "node:path";
 
 // Project-local release staging. Neither action makes a network request or uploads files.
@@ -35,6 +36,19 @@ function git(...args: string[]) {
 
 function hash(path: string) {
   return createHash("sha256").update(readFileSync(path)).digest("hex");
+}
+
+async function previewIsRunning(port: number) {
+  return new Promise<boolean>((done) => {
+    const socket = createConnection({ host: "127.0.0.1", port });
+    const finish = (active: boolean) => {
+      socket.destroy();
+      done(active);
+    };
+    socket.once("connect", () => finish(true));
+    socket.once("error", () => finish(false));
+    socket.setTimeout(1000, () => finish(true));
+  });
 }
 
 function files(directory: string, skipBuildMetadata = false): string[] {
@@ -97,6 +111,10 @@ const wranglerVersion = JSON.parse(
 const action = process.argv[2];
 
 if (action === "prepare") {
+  assert(
+    !(await previewIsRunning(config.dev.port)),
+    `Stop the Cloudflare preview on port ${config.dev.port} before preparing a new package.`,
+  );
   const dist = join(root, "dist");
   const inputs = files(dist, true);
   mkdirSync(output, { recursive: true });

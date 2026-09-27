@@ -6,7 +6,7 @@ Wrangler **4.141.0** is pinned locally. The configuration contains static assets
 
 ## Local preparation
 
-Run from this project folder:
+Run from this project folder. Stop an existing Cloudflare preview before preparing a new package; the staging helper checks its port before replacing files.
 
 ```powershell
 bun install --frozen-lockfile
