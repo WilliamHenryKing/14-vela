@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-27",
+  "runtime": "DOM/CSS/SVG",
+  "files": [
+    {
+      "path": "dist/favicon.svg",
+      "bytes": 242,
+      "sha256": "931454023f34f633ec85065f3ee7164084f17a52c949bfdc0660d6fa5dd2f968"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 19965,
+      "sha256": "3f16a647e4672144a0717811813bb6608fcd2fb2020e4b53e2fa51a3affc4c5b"
+    },
+    {
+      "path": "dist/.vite/manifest.json",
+      "bytes": 185,
+      "sha256": "d8e5a5a1c6156db49b668c74c9afc71277ec4187322f38ec2bde0fa2bf8b11a2"
+    },
+    {
+      "path": "dist/assets/index-BvAfpaHH.js",
+      "bytes": 372361,
+      "sha256": "116ed140d00ef4dc998d2a43923f19c614479fc0696220b99eb4ac2618b9d312"
+    },
+    {
+      "path": "dist/assets/index-jWfOsV3k.css",
+      "bytes": 34116,
+      "sha256": "09f34e87fd31da6279b6986ccb89ade1ada2a9fdc825216e0486dbbe00c449cb"
+    }
+  ]
+}

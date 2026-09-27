@@ -1,0 +1,162 @@
+{
+  "date": "2026-09-27T05:03:54.076Z",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+  "devicePixelRatio": 1,
+  "checks": [
+    "Card finish changes artwork",
+    "Native dialog opens",
+    "Selected plan price appears in summary",
+    "Preview editing preserves selection",
+    "Escape closes dialog",
+    "Dialog restores trigger focus",
+    "Demo card pauses",
+    "Organise displays three pockets",
+    "Zero monthly contribution explains unreachable goal",
+    "Already-funded goal is explicit",
+    "Changing goal recomputes months",
+    "FAQ disclosure opens",
+    "Manual motion setting reverts animations",
+    "No horizontal overflow at 1920x1080",
+    "No horizontal overflow at 768x1024",
+    "No horizontal overflow at 390x844",
+    "No horizontal overflow at 320x740",
+    "No horizontal overflow at 844x390",
+    "Mobile menu closes after navigation",
+    "Mobile product controls remain available",
+    "OS reduced motion respected on cold load",
+    "Reduced-motion hero remains visible",
+    "Keyboard skip link is first",
+    "Skip link navigates to main",
+    "No browser console errors"
+  ],
+  "errors": [],
+  "accessibility": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "nodes": [
+        {
+          "target": [
+            ".hero-notification > span:nth-child(2) > small"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.02 (foreground color: #738071, background color: #fcfcf0, font size: 4.5pt (6px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            "#chapter-0 > .eyebrow"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.49 (foreground color: #62745f, background color: #f2f3eb, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".phone-greeting"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.77 (foreground color: #788472, background color: #fafbf5, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".balance > span"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.41 (foreground color: #9ea695, background color: #fafbf5, font size: 14.3pt (19px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".activity:nth-child(7) > span:nth-child(2) > small"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.79 (foreground color: #778470, background color: #fafbf5, font size: 4.5pt (6px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".activity:nth-child(8) > span:nth-child(2) > small"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.79 (foreground color: #778470, background color: #fafbf5, font size: 4.5pt (6px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".activity:nth-child(9) > span:nth-child(2) > small"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.79 (foreground color: #778470, background color: #fafbf5, font size: 4.5pt (6px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".phone-demo"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.13 (foreground color: #747d6a, background color: #fafbf5, font size: 3.8pt (5px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".goal-tabs > button:nth-child(2)"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.06 (foreground color: #687363, background color: #e5eadd, font size: 6.8pt (9px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".goal-tabs > button:nth-child(3)"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.06 (foreground color: #687363, background color: #e5eadd, font size: 6.8pt (9px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".range-ends:nth-child(5) > span:nth-child(1)"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.32 (foreground color: #617058, background color: #e5eadd, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".range-ends:nth-child(5) > span:nth-child(2)"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.32 (foreground color: #617058, background color: #e5eadd, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".range-ends:nth-child(8) > span:nth-child(1)"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.32 (foreground color: #617058, background color: #e5eadd, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".range-ends:nth-child(8) > span:nth-child(2)"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.32 (foreground color: #617058, background color: #e5eadd, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".calculation-note"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.93 (foreground color: #687661, background color: #e5eadd, font size: 6.8pt (9px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".plans-note"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.44 (foreground color: #697361, background color: #f2f3eb, font size: 6.8pt (9px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            "details:nth-child(1) > summary > .faq-number"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.72 (foreground color: #718168, background color: #f2f3eb, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            "details:nth-child(2) > summary > .faq-number"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.72 (foreground color: #718168, background color: #f2f3eb, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            "details:nth-child(3) > summary > .faq-number"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.72 (foreground color: #718168, background color: #f2f3eb, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            "details:nth-child(4) > summary > .faq-number"
+          ],
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.72 (foreground color: #718168, background color: #f2f3eb, font size: 6.0pt (8px), font weight: normal). Expected contrast ratio of 4.5:1"
+        }
+      ]
+    }
+  ],
+  "scope": "Functional automation and sampled viewport captures; not continuous motion viewing or physical-phone evidence."
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "vela-original-art",
+      "title": "Vela mark and card linework",
+      "author": "Original project artwork",
+      "license": "Original project source",
+      "source": "src/App.tsx and src/style.css",
+      "processing": "Authored inline SVG and CSS; bundled by Vite",
+      "files": ["public/favicon.svg"],
+      "sha256": "931454023f34f633ec85065f3ee7164084f17a52c949bfdc0660d6fa5dd2f968",
+      "bytes": 242,
+      "retrieved": "2026-09-27"
+    }
+  ]
+}
