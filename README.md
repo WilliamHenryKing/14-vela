@@ -1,24 +1,59 @@
-# VELA — make room for more
+<p align="center"><img src="docs/readme/banner.svg" alt="VELA: make room for more with card finishes, a savings planner and plans that add up." width="100%"></p>
 
-Free Cloudflare hosting preparation and commands: [CLOUDFLARE.md](CLOUDFLARE.md). The local release package is prepared separately from publication.
+<p align="center">
+  <a href="https://14-vela.williamking.workers.dev"><img alt="Visit the live site" src="https://img.shields.io/badge/Visit_live_site-%E2%86%97-d8e35a?style=for-the-badge&labelColor=0e140e"></a>
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-d8e35a?style=for-the-badge&logo=typescript&logoColor=0e140e&labelColor=0e140e">
+  <img alt="React" src="https://img.shields.io/badge/React-d8e35a?style=for-the-badge&logo=react&logoColor=0e140e&labelColor=0e140e">
+  <img alt="GSAP" src="https://img.shields.io/badge/GSAP-d8e35a?style=for-the-badge&logo=greensock&logoColor=0e140e&labelColor=0e140e">
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-d8e35a?style=for-the-badge&logo=tailwindcss&logoColor=0e140e&labelColor=0e140e">
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-d8e35a?style=for-the-badge&logo=vite&logoColor=0e140e&labelColor=0e140e">
+  <img alt="Bun" src="https://img.shields.io/badge/Bun-d8e35a?style=for-the-badge&logo=bun&logoColor=0e140e&labelColor=0e140e">
+</p>
 
-Project 14: conventional banking website concept with original art and GSAP choreography. No Three.js, game world, real bank or external submission.
+**A fictional everyday-banking brand.** A confident graphic website with live card finishes, scroll-linked choreography, a three-chapter product tour and a savings planner that tells the truth about contributions.
 
-From this folder:
+<p align="center"><img src="docs/readme/preview.gif" alt="Scrolling from the hero through the product chapters" width="800"></p>
 
-```powershell
+## What you can do
+
+- **Choose a card finish** and watch the artwork respond to your pointer and light.
+- **Take the product tour** in three chapters, with a chapter dock that tracks your reading.
+- **Plan savings** with a contributions-only calculator and goal milestones.
+- **Compare plans**, preview the sample app in a guided dialog, and browse the FAQ.
+
+## What's inside
+
+- **Scroll-linked type, rings and card composition** choreographed with GSAP ScrollTrigger and SplitText.
+- **A usable pause-card control**, an editable guided preview and a large moving typographic interlude.
+- **Readable before JavaScript loads:** content is statically prerendered; interactive controls enhance it.
+- **Care for motion and access:** a motion preference control, OS reduced-motion support, mobile navigation and zero axe violations in the final review.
+- **Honest numbers:** every account, price and balance is fictional, and no personal data is collected.
+
+## Screenshots
+
+| Desktop | Phone |
+| --- | --- |
+| <img src="docs/readme/desktop.png" alt="VELA's hero on desktop" width="560"> | <img src="docs/readme/phone.png" alt="VELA on a phone" width="220"> |
+
+## Built with
+
+React, GSAP (ScrollTrigger, SplitText, DrawSVG), Tailwind CSS with Lightning CSS, TypeScript, Vite and Bun. No Three.js.
+
+## Run it locally
+
+```sh
 bun install --frozen-lockfile
-bun run dev
+bun run dev      # http://127.0.0.1:4524/
+bun run check    # strict TypeScript, Biome, domain tests and the prerendered build
+bun run preview  # http://127.0.0.1:4624/ after bun run build
 ```
 
-Dev: http://127.0.0.1:4524/ · production preview after `bun run build`: http://127.0.0.1:4624/ (`bun run preview`). Both bind to loopback and require the exact port.
+Design and verification: [DESIGN.md](DESIGN.md), [docs/visual/VERIFICATION.md](docs/visual/VERIFICATION.md) and the working history in [docs/PROJECT-NOTES.md](docs/PROJECT-NOTES.md).
 
-`bun run check` runs strict TypeScript, Biome, six meaningful domain tests and a production build with static prerendering. Content is readable before JavaScript loads; interactive controls need JavaScript. Static output is in `dist/` and is not deployed.
+## Credits
 
-Features: responsive graphic hero and live card finishes; scroll-linked type/rings/card composition; three-chapter product tour; usable pause-card control; savings contribution calculator; sample plan comparison; editable guided preview dialog; FAQ; mobile navigation; motion preference control and OS reduced-motion support. Every account/price/balance is fictional and no personal data is collected.
+Original art and code; sources and licences for anything else are in [CREDITS.md](CREDITS.md) and [assets.manifest.json](assets.manifest.json). VELA is not a real bank.
 
-Second-pass refinements add pointer-responsive card artwork and finish lighting, expressive product-stage graphics, a goal milestone, a large moving typographic interlude and a chapter dock with reading progress. New evidence is in `docs/visual/captures/refinement-2026-09-27/`; first-delivery captures remain intact.
+---
 
-Design and source policy: DESIGN.md, docs/visual/PROJECT_PROFILE.md and CREDITS.md. Browser evidence and limitations: docs/visual/VERIFICATION.md and captures/review-2026-09-27. Self-review only; William's aesthetic acceptance remains open.
-
-Browser scripts are Playwright CLI snippets, using the existing external CLI/axe cache rather than project runtime dependencies. Start the preview, then run `npx --package @playwright/cli playwright-cli -s=vela open http://127.0.0.1:4624/ --browser=chrome` and `npx --package @playwright/cli playwright-cli -s=vela --raw run-code --filename=tools/browser/review.txt`. The accessibility source path in the snippets is machine-specific and must be rediscovered if the external cache changes.
+<p align="center"><sub>Part of William King's portfolio collection.</sub></p>
