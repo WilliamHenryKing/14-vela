@@ -1,54 +1,69 @@
-<p align="center"><img src="docs/readme/banner.svg" alt="VELA: make room for more with card finishes, a savings planner and plans that add up." width="100%"></p>
+# VELA
 
-<p align="center">
-  <a href="https://14-vela.williamking.workers.dev"><img alt="Visit the live site" src="https://img.shields.io/badge/Visit_live_site-%E2%86%97-d8e35a?style=for-the-badge&labelColor=0e140e"></a>
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-d8e35a?style=for-the-badge&logo=typescript&logoColor=0e140e&labelColor=0e140e">
-  <img alt="React" src="https://img.shields.io/badge/React-d8e35a?style=for-the-badge&logo=react&logoColor=0e140e&labelColor=0e140e">
-  <img alt="GSAP" src="https://img.shields.io/badge/GSAP-d8e35a?style=for-the-badge&logo=greensock&logoColor=0e140e&labelColor=0e140e">
-  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-d8e35a?style=for-the-badge&logo=tailwindcss&logoColor=0e140e&labelColor=0e140e">
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-d8e35a?style=for-the-badge&logo=vite&logoColor=0e140e&labelColor=0e140e">
-  <img alt="Bun" src="https://img.shields.io/badge/Bun-d8e35a?style=for-the-badge&logo=bun&logoColor=0e140e&labelColor=0e140e">
-</p>
+<p align="center"><img src="docs/readme/banner.svg" alt="VELA" width="100%"></p>
 
-**A fictional everyday-banking brand.** A confident graphic website with live card finishes, scroll-linked choreography, a three-chapter product tour and a savings planner that tells the truth about contributions.
+A fictional everyday-banking website built around the things a visitor can try: change a card finish, explore a sample app, plan a savings goal and compare plans. Bold type, a moving card composition and scroll-linked chapters give the product a distinct visual identity.
 
-<p align="center"><img src="docs/readme/preview.gif" alt="Scrolling from the hero through the product chapters" width="800"></p>
+**[Explore VELA →](https://14-vela.williamking.workers.dev)** · [Run locally](#run-locally) · [Credits](#credits)
 
-## What you can do
+<p align="center"><img src="docs/readme/preview.gif" alt="The current VELA card composition and scroll-linked product introduction" width="800"></p>
 
-- **Choose a card finish** and watch the artwork respond to your pointer and light.
-- **Take the product tour** in three chapters, with a chapter dock that tracks your reading.
-- **Plan savings** with a contributions-only calculator and goal milestones.
-- **Compare plans**, preview the sample app in a guided dialog, and browse the FAQ.
+## Try the product story
 
-## What's inside
+- **Choose a card finish.** The hero card responds to the pointer and changes its surface treatment. Pause the moving card when you want to inspect it.
+- **Explore three product chapters.** A reading dock tracks progress through the tour. Sample app tabs let you inspect the product states rather than only reading about them.
+- **Build a savings goal.** Change the starting amount, monthly contribution and goal. The chart and milestones show contributions only: no invented interest, investment growth or guaranteed return.
+- **Compare plans.** Inspect the fictional plan costs and open a guided preview. Review a choice, edit it and return without losing the work in the dialog.
+- **Read the details.** Native FAQ controls, mobile navigation and clear closing actions support the longer page.
 
-- **Scroll-linked type, rings and card composition** choreographed with GSAP ScrollTrigger and SplitText.
-- **A usable pause-card control**, an editable guided preview and a large moving typographic interlude.
-- **Readable before JavaScript loads:** content is statically prerendered; interactive controls enhance it.
-- **Care for motion and access:** a motion preference control, OS reduced-motion support, mobile navigation and zero axe violations in the final review.
-- **Honest numbers:** every account, price and balance is fictional, and no personal data is collected.
+This is a portfolio demonstration, not a bank. Accounts, balances, card products and prices are fictional. The preview does not open an account or send an application to a financial provider.
 
-## Screenshots
+## Motion that supports the page
+
+GSAP ScrollTrigger coordinates the card, rings, large typography and chapter changes. SplitText handles text entrances; DrawSVG supports graphic details. Animation is scoped to the React lifecycle through useGSAP, with cleanup when the view is removed.
+
+The site retains native scrolling, visible keyboard focus and a skip link. Visitors can change the motion preference, and the OS reduced-motion preference is respected. The chapter dock yields while calculator fields have keyboard focus. Native dialogs support Escape and focus return, and the card has its own pause control.
+
+## Frontend architecture
+
+VELA uses React, strict TypeScript, GSAP and Tailwind with Lightning CSS. The artwork is made with HTML, CSS and SVG; there is no Three.js runtime, external photograph service or runtime font request. Static prerendering makes the core copy readable before JavaScript loads. Interactions enhance that page in the browser.
+
+- [src/App.tsx](src/App.tsx): product chapters, card, calculator, plans and guided preview.
+- [src/domain.ts](src/domain.ts): contribution and plan calculations.
+- [src/motion.ts](src/motion.ts): shared motion behaviour.
+- [tools/prerender.tsx](tools/prerender.tsx): static HTML output.
+- [DESIGN.md](DESIGN.md): the visual and interaction brief.
+
+## Recorded verification
+
+The current application revision is `24f37f0`. The implementation review recorded **six domain tests / 19 assertions**, 25 browser regressions and ten refinement interaction checks. Final sampled desktop, mobile and dialog states had no browser errors or automated axe violations. Read [VERIFICATION.md](docs/visual/VERIFICATION.md) for viewports, checks and limitations. This is bounded browser evidence, not a blanket accessibility certification.
+
+## Current screenshots
 
 | Desktop | Phone |
 | --- | --- |
-| <img src="docs/readme/desktop.png" alt="VELA's hero on desktop" width="560"> | <img src="docs/readme/phone.png" alt="VELA on a phone" width="220"> |
+| <img src="docs/readme/desktop.jpg" alt="VELA: current desktop opening" width="600"> | <img src="docs/readme/phone.jpg" alt="VELA: current phone interface" width="240"> |
 
-## Built with
+<img src="docs/readme/detail.jpg" alt="VELA: the experience after the opening" width="800">
 
-React, GSAP (ScrollTrigger, SplitText, DrawSVG), Tailwind CSS with Lightning CSS, TypeScript, Vite and Bun. No Three.js.
+The opening loop and three main screenshots were captured from the live site on **1 October 2026**, using Chrome on this workstation; the phone image is a 390 × 844 browser viewport. The animated preview is a short loop, not a full playthrough. [Capture details](docs/readme/capture.json).
 
-## Run it locally
+## Run locally
+
+Use **Bun 1.3.10** (the version pinned in `package.json`) and Node.js 22.12 or newer. From this repository:
 
 ```sh
 bun install --frozen-lockfile
 bun run dev      # http://127.0.0.1:4524/
-bun run check    # strict TypeScript, Biome, domain tests and the prerendered build
-bun run preview  # http://127.0.0.1:4624/ after bun run build
+bun run check    # strict types, Biome, unit tests and production build
+bun run preview  # http://127.0.0.1:4624/ after the build
 ```
 
-Design and verification: [DESIGN.md](DESIGN.md), [docs/visual/VERIFICATION.md](docs/visual/VERIFICATION.md) and the working history in [docs/PROJECT-NOTES.md](docs/PROJECT-NOTES.md).
+Development and preview are separate long-running commands; run one at a time or use separate terminals. `bun run build` writes the static production output to `dist/`. Dependencies and the lockfile are local to this project.
+
+## Stack and release
+
+React 19.3 · strict TypeScript · Vite 8.3 · GSAP 3.15 · Tailwind CSS 4.3 · Bun 1.3.10 · Biome. The public website is served by Cloudflare Workers. This README describes [application revision 24f37f0](https://github.com/WilliamHenryKing/14-vela/commit/24f37f0bbb670cebf9cd14a46f733595813082ac); the documentation refresh changes no application behaviour.
 
 ## Credits
 
@@ -56,4 +71,4 @@ Original art and code; sources and licences for anything else are in [CREDITS.md
 
 ---
 
-<p align="center"><sub>Part of William King's portfolio collection.</sub></p>
+Part of [William King's portfolio collection](https://github.com/WilliamHenryKing).
